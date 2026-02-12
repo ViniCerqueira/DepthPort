@@ -1,5 +1,24 @@
 ---
+import '../styles/global.css';
 
+const pageTitle = "Sobre Mim"
+
+const identity = {
+  primeirNome: "Vinicius",
+  pais: "Brasil",
+  profissao: "Desenvolvedor Frontend",
+  passaTempo: "Estudos, Criação de Artes, Leitura, Filmes, Musica, Espotes, Video Games"
+  };
+
+const skills = ["React", "Tailwind CSS", "Astro", "JavaScript", "TypeScript", "HTML", "CSS"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "crimson";
+const skillTransform = "uppercase";
+const skillWeigth = "bold";
 ---
 
 <html lang="en">
@@ -9,17 +28,49 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{pageTitle}</title>
+    <style define:vars={{skillColor, skillTransform, skillWeigth}}>
+      h1 
+      {
+        color: purple;
+        
+      }
+
+      .skill 
+      {
+        color: var(--skillColor);
+        text-transform: var(--skillTransform);
+        font-weight: var(--skillWeigth);
+      }
+    </style>
+
 	</head>
 	<body>
     <a href="/">Menu</a>
     <a href="/about">Sobre</a>
     <a href="/blog">Blog</a>  
-    <h1>Meu Site Astro</h1>
-    <h1>Sobre Mim</h1>
+    <h1>{pageTitle}</h1>
     <h2>Este é meu novo projeto de trabalho Astro</h2>
 
     <p>Trabalho com as tecnologias React, Tailwind CSS e recentemento tenho migrado para Astro.</p> 
     <p>O intuito da migração se trata de utilizar a ferramenta para trabalhos focados em telas slimpes com estilos modernos e componetes dinamicos</p>
+    <p>Aqui estão alguns fatos sobre mim:</p>
+    <ul>
+      <li>Meu nome é {identity.primeirNome}.</li>
+      <li>Eu vivo no {identity.pais} e trabalho como {identity.profissao}.</li>
+      {identity.passaTempo.length >= 2 &&
+      <li>Dois dos meu Passa-tempo são: {identity.passaTempo[0]} e o outro é escutar muita {identity.passaTempo[5]}.</li>
+      }
+      
+    </ul>
+    <p>Minhas Skills:</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    {happy && <p>Estou muito feliz poor estar apreendendo Astro!</p>}
+    {finished && <p>Tutorial Finalizado!</p>}
+    {goal === 3 ? <p>Meu objetivo é terminar 3 dias!</p> : <p>Meu objetivo não é 3 dias</p>}
+
 	</body>
 </html>
